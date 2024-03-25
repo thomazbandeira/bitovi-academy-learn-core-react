@@ -73,3 +73,28 @@ Branch: [03-building-Components](https://github.com/thomazbandeira/bitovi-academ
  01 - Move the logic in our App component to our new RestaurantList component.
  
  02 - Update our App component to use our new RestaurantList component.
+
+ ## Fourth step (First day)
+
+[Passing Props](https://www.bitovi.com/academy/learn-react/components.html)
+
+Branch: [04-passing-props](https://github.com/thomazbandeira/bitovi-academy-learn-core-react/tree/04-passing-props)
+
+
+#### SETUP
+
+
+Create src/pages/RestaurantList/ListItem.tsx
+
+Update src/pages/RestaurantList/RestaurantList.tsx
+
+ Create src/pages/RestaurantList/ListItem.test.tsx
+
+
+  #### Exercise 01 
+
+  01 - Update ListItem to accept props with restaurant data.
+
+  02 - Alter ListItem to return the JSX for a single item in restaurants.data, use props for the variable data.
+
+  03 - Refactor RestaurantList to use ListItem to render the items in restaurants.data.

@@ -1,5 +1,6 @@
 import CheeseThumbnail from 'place-my-order-assets/images/2-thumbnail.jpg'
 import PoutineThumbnail from 'place-my-order-assets/images/4-thumbnail.jpg'
+import ListItem from './ListItem'
 
 const RestaurantList: React.FC = () => {
   const restaurants = {
