@@ -24,9 +24,12 @@ npm install
 
 Branch: [02-introduction-to-jsx](https://github.com/thomazbandeira/bitovi-academy-learn-core-react/tree/02-introduction-to-jsx)
 
-Objective 01
+Exercise 01
 copy broken test and implement html to JSX
 
-Objective 02
-use Variables and expressions in JSX.
+Exercise 02
+01 - Update the existing JSX to render the list of restaurants
+02 - Use Array.map() to iterate over the restaurants.data
+03 - Make sure to use key inside the .map()
+04 - Render <p>No restaurants.</p> if, hypothetically, there weren’t any restaurants.
 
