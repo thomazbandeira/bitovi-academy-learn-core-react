@@ -14,3 +14,7 @@ React is versatile and isn’t limited to web apps. It can also be used for crea
 [setting-up-your-environment](https://www.bitovi.com/academy/learn-react/setting-up-your-environment.html)
 
 Branch: [01-setting-up-your-environment](https://shields.io/)
+
+cd place-my-order
+npm install
+
