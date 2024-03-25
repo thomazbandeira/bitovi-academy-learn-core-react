@@ -42,30 +42,13 @@ const RestaurantList: React.FC = () => {
         <h2 className="page-header">Restaurants</h2>
         {restaurants.data ? (
           restaurants.data.map(({ _id, address, images, name, slug }) => (
-            <div key={_id} className="restaurant">
-              <img src={images.thumbnail} alt="" width="100" height="100" />
-              <h3>{name}</h3>
-
-              {address && (
-                <div className="address">
-                  {address.street}
-                  <br />
-                  {address.city}, {address.state} {address.zip}
-                </div>
-              )}
-
-              <div className="hours-price">
-                $$$
-                <br />
-                Hours: M-F 10am-11pm
-                <span className="open-now">Open Now</span>
-              </div>
-
-              <a className="btn" href={`/restaurants/${slug}`}>
-                Details
-              </a>
-              <br />
-            </div>
+            <ListItem
+              key={_id}
+              address={address}
+              name={name}
+              slug={slug}
+              thumbnail={images.thumbnail}
+            />
           ))
         ) : (
           <p>No restaurants.</p>
