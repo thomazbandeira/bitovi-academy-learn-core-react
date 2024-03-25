@@ -18,3 +18,18 @@ Branch: [01-setting-up-your-environment](https://shields.io/)
 cd place-my-order
 npm install
 
+## Second step (First day)
+
+[Introduction to JSX](https://www.bitovi.com/academy/learn-react/intro-to-jsx.html)
+
+Branch: [02-introduction-to-jsx](https://github.com/thomazbandeira/bitovi-academy-learn-core-react/tree/02-introduction-to-jsx)
+
+Exercise 01
+copy broken test and implement html to JSX
+
+Exercise 02
+01 - Update the existing JSX to render the list of restaurants
+02 - Use Array.map() to iterate over the restaurants.data
+03 - Make sure to use key inside the .map()
+04 - Render <p>No restaurants.</p> if, hypothetically, there weren’t any restaurants.
+
