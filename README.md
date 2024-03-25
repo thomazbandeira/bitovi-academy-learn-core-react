@@ -24,5 +24,9 @@ npm install
 
 Branch: [02-introduction-to-jsx](https://github.com/thomazbandeira/bitovi-academy-learn-core-react/tree/02-introduction-to-jsx)
 
+Objective 01
 copy broken test and implement html to JSX
+
+Objective 02
+use Variables and expressions in JSX.
 

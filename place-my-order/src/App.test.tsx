@@ -10,37 +10,48 @@ describe('App component', () => {
     expect(screen.getByText(/Restaurants/i)).toBeInTheDocument();
   });
 
-  it('renders the restaurant image', () => {
+  it('renders the restaurant images', () => {
     render(<App />);
-    const img = screen.getByRole('img');
-    expect(img).toHaveAttribute('src', '/node_modules/place-my-order-assets/images/4-thumbnail.jpg');
-    expect(img).toHaveAttribute('width', '100');
-    expect(img).toHaveAttribute('height', '100');
+    const images = screen.getAllByRole('img');
+    expect(images[0]).toHaveAttribute('src', expect.stringContaining('2-thumbnail.jpg'));
+    expect(images[0]).toHaveAttribute('width', '100');
+    expect(images[0]).toHaveAttribute('height', '100');
+    expect(images[1]).toHaveAttribute('src', expect.stringContaining('4-thumbnail.jpg'));
+    expect(images[1]).toHaveAttribute('width', '100');
+    expect(images[1]).toHaveAttribute('height', '100');
   });
 
-  it('renders the address', () => {
+  it('renders the addresses', () => {
     render(<App />);
-    const addressDiv = screen.getByText(/230 W Kinzie Street/i).closest('div');
-    expect(addressDiv).toHaveTextContent('230 W Kinzie Street');
-    expect(addressDiv).toHaveTextContent('Green Bay, WI 53205');
+    const addressDivs = screen.getAllByText(/Washburne Ave|Kinzie Street/i);
+    expect(addressDivs[0]).toHaveTextContent('2451 W Washburne Ave');
+    expect(addressDivs[0]).toHaveTextContent('Green Bay, WI 53295');
+    expect(addressDivs[1]).toHaveTextContent('230 W Kinzie Street');
+    expect(addressDivs[1]).toHaveTextContent('Green Bay, WI 53205');
   });
 
-  it('renders the hours and price information', () => {
+  it('renders the hours and price information for each restaurant', () => {
     render(<App />);
-    const hoursPriceDiv = screen.getByText(/\$\$\$/i).closest('div');
-    expect(hoursPriceDiv).toHaveTextContent('$$$');
-    expect(hoursPriceDiv).toHaveTextContent('Hours: M-F 10am-11pm');
+    const hoursPriceDivs = screen.getAllByText(/\$\$\$/i);
+    hoursPriceDivs.forEach(div => {
+      expect(div).toHaveTextContent('$$$');
+      expect(div).toHaveTextContent('Hours: M-F 10am-11pm');
+    });
   });
 
-  it('indicates if the restaurant is open now', () => {
+  it('indicates if the restaurant is open now for each restaurant', () => {
     render(<App />);
-    expect(screen.getByText('Open Now')).toBeInTheDocument();
+    const openNowTags = screen.getAllByText('Open Now');
+    expect(openNowTags.length).toBeGreaterThan(0);
   });
 
-  it('renders the details button with correct link', () => {
+  it('renders the details buttons with correct links for each restaurant', () => {
     render(<App />);
-    const detailsButton = screen.getByRole('link');
-    expect(detailsButton).toHaveAttribute('href', '/restaurants/poutine-palace');
-    expect(screen.getByText('Details')).toBeInTheDocument();
+    const detailsButtons = screen.getAllByRole('link');
+    expect(detailsButtons[0]).toHaveAttribute('href', '/restaurants/cheese-curd-city');
+    expect(detailsButtons[1]).toHaveAttribute('href', '/restaurants/poutine-palace');
+    detailsButtons.forEach(button => {
+      expect(button).toHaveTextContent('Details');
+    });
   });
 });
