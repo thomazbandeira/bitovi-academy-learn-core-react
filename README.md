@@ -101,7 +101,7 @@ Update src/pages/RestaurantList/RestaurantList.tsx
 
    ## Fifth step (First day)
 
-[Routing in React](https://www.bitovi.com/academy/learn-react/components.html)
+[Routing in React]([https://www.bitovi.com/academy/learn-react/components.html](https://www.bitovi.com/academy/learn-react/routing.html)
 
 Branch: [05-routing-in-react](https://github.com/thomazbandeira/bitovi-academy-learn-core-react/tree/05-routing-in-react)
 
