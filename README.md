@@ -151,3 +151,27 @@ Update the styles in Home.module.css to be usable as a CSS Module.
 Update the <Home> component to include a styled link:
 Use <Link> (from the previous section!) to create a link to the /restaurants page.
 Import the styles from Home.module.css and apply them to the new link.
+
+## seventh step (First day)
+
+[Managing State in React](https://www.bitovi.com/academy/learn-react/stateful-hooks.html)
+
+Branch: [07-managing-state-in-react](https://github.com/thomazbandeira/bitovi-academy-learn-core-react/tree/07-managing-state-in-react)
+
+
+#### SETUP
+
+Update src/pages/RestaurantList/RestaurantList.tsx to include the State and City dropdown lists.
+
+Update src/pages/RestaurantList/RestaurantList.test.tsx
+
+
+
+  #### Exercise 01 
+
+  01 - Let’s create buttons for each state that we can select. Then, when the button for a state is activated, we want to keep track of which state was choosen.
+
+Call useState() to get a state variable and setState setter.
+Create a helper function that takes a short state name and calls setState.
+Add an onClick handler to the button that calls your helper function.
+Update the paragraph to show the currently-selected state.

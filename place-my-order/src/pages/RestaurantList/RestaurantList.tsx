@@ -1,8 +1,15 @@
 import CheeseThumbnail from 'place-my-order-assets/images/2-thumbnail.jpg'
 import PoutineThumbnail from 'place-my-order-assets/images/4-thumbnail.jpg'
+import { useState } from 'react'
 import ListItem from './ListItem'
 
 const RestaurantList: React.FC = () => {
+
+  const states = [
+    { name: 'Illinois', short: 'IL' },
+    { name: 'Wisconsin', short: 'WI' },
+  ]
+
   const restaurants = {
     data: [
       {
@@ -40,6 +47,22 @@ const RestaurantList: React.FC = () => {
     <>
       <div className="restaurants">
         <h2 className="page-header">Restaurants</h2>
+
+        <form className="form">
+          <div className="form-group">
+            State:
+            {states.map(({ short, name }) => (
+              <button key={short} type="button">
+                {name}
+              </button>
+            ))}
+            <hr />
+            <p>
+              Current state: {"(none)"}
+            </p>
+          </div>
+        </form>
+
         {restaurants.data ? (
           restaurants.data.map(({ _id, address, images, name, slug }) => (
             <ListItem
