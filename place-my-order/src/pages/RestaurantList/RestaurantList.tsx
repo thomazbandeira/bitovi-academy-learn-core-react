@@ -5,6 +5,7 @@ import ListItem from './ListItem'
 
 const RestaurantList: React.FC = () => {
   const [state, setState] = useState("")
+  const [city, setCity] = useState("")
 
   const states = [
     { name: 'Illinois', short: 'IL' },
@@ -14,7 +15,9 @@ const RestaurantList: React.FC = () => {
   const cities = [
     { name: 'Madison', state: 'WI' },
     { name: 'Springfield', state: 'IL' },
-  ]
+  ].filter(city => {
+    return city.state === state
+  })
 
   const restaurants = {
     data: [
@@ -51,6 +54,11 @@ const RestaurantList: React.FC = () => {
 
   const updateState = (stateShortCode: string) => {
     setState(stateShortCode)
+    setCity("")
+  }
+
+  const updateCity = (cityName: string) => {
+    setCity(cityName)
   }
 
   return (
@@ -75,13 +83,13 @@ const RestaurantList: React.FC = () => {
           <div className="form-group">
             City:
             {state ? cities.map(({ name }) => (
-              <button key={name} type="button">
+              <button key={name} onClick={() => updateCity(name)} type="button">
                 {name}
               </button>
             )) : <> Choose a state before selecting a city</>}
             <hr />
             <p>
-              Current city: {"(none)"}
+              Current city: {city || "(none)"}
             </p>
           </div>
         </form>
