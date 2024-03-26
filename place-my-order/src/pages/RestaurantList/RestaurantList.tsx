@@ -1,8 +1,24 @@
 import CheeseThumbnail from 'place-my-order-assets/images/2-thumbnail.jpg'
 import PoutineThumbnail from 'place-my-order-assets/images/4-thumbnail.jpg'
+import { useState } from 'react'
 import ListItem from './ListItem'
 
 const RestaurantList: React.FC = () => {
+  const [state, setState] = useState("")
+  const [city, setCity] = useState("")
+
+  const states = [
+    { name: 'Illinois', short: 'IL' },
+    { name: 'Wisconsin', short: 'WI' },
+  ]
+
+  const cities = [
+    { name: 'Madison', state: 'WI' },
+    { name: 'Springfield', state: 'IL' },
+  ].filter(city => {
+    return city.state === state
+  })
+
   const restaurants = {
     data: [
       {
@@ -36,10 +52,48 @@ const RestaurantList: React.FC = () => {
     ]
   };
 
+  const updateState = (stateShortCode: string) => {
+    setState(stateShortCode)
+    setCity("")
+  }
+
+  const updateCity = (cityName: string) => {
+    setCity(cityName)
+  }
+
   return (
     <>
       <div className="restaurants">
         <h2 className="page-header">Restaurants</h2>
+
+        <form className="form">
+          <div className="form-group">
+            State:
+            {states.map(({ short, name }) => (
+              <button key={short} onClick={() => updateState(short)} type="button">
+                {name}
+              </button>
+            ))}
+            <hr />
+            <p>
+              Current state: {state || "(none)"}
+            </p>
+          </div>
+
+          <div className="form-group">
+            City:
+            {state ? cities.map(({ name }) => (
+              <button key={name} onClick={() => updateCity(name)} type="button">
+                {name}
+              </button>
+            )) : <> Choose a state before selecting a city</>}
+            <hr />
+            <p>
+              Current city: {city || "(none)"}
+            </p>
+          </div>
+        </form>
+
         {restaurants.data ? (
           restaurants.data.map(({ _id, address, images, name, slug }) => (
             <ListItem

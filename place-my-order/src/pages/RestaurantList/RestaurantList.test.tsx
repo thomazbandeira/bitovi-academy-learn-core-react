@@ -1,56 +1,93 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest';
-import ListItem from './ListItem';
 
-describe('ListItem component', () => {
-  it('renders the restaurant image', () => {
-    render(<ListItem slug="test-slug" name="Test Name" thumbnail="test-thumbnail.jpg" />);
-    const img = screen.getByRole('img');
-    expect(img).toHaveAttribute('src', 'test-thumbnail.jpg');
-    expect(img).toHaveAttribute('width', '100');
-    expect(img).toHaveAttribute('height', '100');
+import RestaurantList from './RestaurantList';
+
+describe('RestaurantList component', () => {
+  it('renders the Restaurants header', () => {
+    render(<RestaurantList />);
+    expect(screen.getByText(/Restaurants/i)).toBeInTheDocument();
   });
 
-  it('renders the address', () => {
-    const address = {
-      city: 'Test City',
-      state: 'Test State',
-      street: 'Test Street',
-      zip: '12345',
-    };
-
-    render(<ListItem slug="test-slug" name="Test Name" address={address} thumbnail="test-thumbnail.jpg" />);
-
-    const addressDiv = screen.getByText(/Test Street/i).closest('div');
-    expect(addressDiv).toHaveTextContent('Test Street');
-    expect(addressDiv).toHaveTextContent('Test City, Test State 12345');
+  it('renders the restaurant images', () => {
+    render(<RestaurantList />);
+    const images = screen.getAllByRole('img');
+    expect(images[0]).toHaveAttribute('src', expect.stringContaining('2-thumbnail.jpg'));
+    expect(images[0]).toHaveAttribute('width', '100');
+    expect(images[0]).toHaveAttribute('height', '100');
+    expect(images[1]).toHaveAttribute('src', expect.stringContaining('4-thumbnail.jpg'));
+    expect(images[1]).toHaveAttribute('width', '100');
+    expect(images[1]).toHaveAttribute('height', '100');
   });
 
-  it('does not render the address section when address is not provided', () => {
-    render(<ListItem slug="test-slug" name="Test Name" thumbnail="test-thumbnail.jpg" />);
-
-    // Check that address-related text is not in the document
-    expect(screen.queryByText('Test Street')).not.toBeInTheDocument();
-    expect(screen.queryByText(/Test City, Test State 12345/)).not.toBeInTheDocument();
+  it('renders the addresses', () => {
+    render(<RestaurantList />);
+    const addressDivs = screen.getAllByText(/Washburne Ave|Kinzie Street/i);
+    expect(addressDivs[0]).toHaveTextContent('2451 W Washburne Ave');
+    expect(addressDivs[0]).toHaveTextContent('Green Bay, WI 53295');
+    expect(addressDivs[1]).toHaveTextContent('230 W Kinzie Street');
+    expect(addressDivs[1]).toHaveTextContent('Green Bay, WI 53205');
   });
 
-  it('renders the hours and price information', () => {
-    render(<ListItem slug="test-slug" name="Test Name" thumbnail="test-thumbnail.jpg" />);
-    const hoursPriceDiv = screen.getByText(/\$\$\$/i).closest('div');
-    expect(hoursPriceDiv).toHaveTextContent('$$$');
-    expect(hoursPriceDiv).toHaveTextContent('Hours: M-F 10am-11pm');
+  it('renders the hours and price information for each restaurant', () => {
+    render(<RestaurantList />);
+    const hoursPriceDivs = screen.getAllByText(/\$\$\$/i);
+    hoursPriceDivs.forEach(div => {
+      expect(div).toHaveTextContent('$$$');
+      expect(div).toHaveTextContent('Hours: M-F 10am-11pm');
+    });
   });
 
-  it('indicates if the restaurant is open now', () => {
-    render(<ListItem slug="test-slug" name="Test Name" thumbnail="test-thumbnail.jpg" />);
-    expect(screen.getByText('Open Now')).toBeInTheDocument();
+  it('indicates if the restaurant is open now for each restaurant', () => {
+    render(<RestaurantList />);
+    const openNowTags = screen.getAllByText('Open Now');
+    expect(openNowTags.length).toBeGreaterThan(0);
   });
 
-  it('renders the details button with correct link', () => {
-    render(<ListItem slug="test-slug" name="Test Name" thumbnail="test-thumbnail.jpg" />);
-    const detailsButton = screen.getByRole('link');
-    expect(detailsButton).toHaveAttribute('href', '/restaurants/test-slug');
-    expect(screen.getByText('Details')).toBeInTheDocument();
+  it('renders the details buttons with correct links for each restaurant', () => {
+    render(<RestaurantList />);
+    const detailsButtons = screen.getAllByRole('link');
+    expect(detailsButtons[0]).toHaveAttribute('href', '/restaurants/cheese-curd-city');
+    expect(detailsButtons[1]).toHaveAttribute('href', '/restaurants/poutine-palace');
+    detailsButtons.forEach(button => {
+      expect(button).toHaveTextContent('Details');
+    });
   });
+
+  it('renders the component', () => {
+    render(<RestaurantList />)
+    expect(screen.getByText('Restaurants')).toBeInTheDocument()
+    expect(screen.getByText('State:')).toBeInTheDocument()
+  })
+
+  it('allows state selection and updates cities accordingly', async () => {
+    render(<RestaurantList />)
+
+    const illinoisButton = screen.getByText('Illinois')
+    await userEvent.click(illinoisButton)
+
+    expect(screen.getByText('Current state: IL')).toBeInTheDocument()
+    expect(screen.queryByText('Choose a state before selecting a city')).not.toBeInTheDocument()
+  })
+
+  it('allows city selection after a state is selected', async () => {
+    render(<RestaurantList />)
+
+    const illinoisButton = screen.getByText('Illinois')
+    await userEvent.click(illinoisButton)
+
+    const greenBayButton = screen.getByText('Springfield')
+    await userEvent.click(greenBayButton)
+
+    expect(screen.getByText('Current city: Springfield')).toBeInTheDocument()
+  })
+
+  it('renders ListItem components for each restaurant', () => {
+    render(<RestaurantList />)
+
+    const restaurantNames = screen.getAllByText(/Cheese Curd City|Poutine Palace/)
+    expect(restaurantNames.length).toBe(2)
+  })
 });
