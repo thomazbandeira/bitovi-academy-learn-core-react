@@ -98,3 +98,32 @@ Update src/pages/RestaurantList/RestaurantList.tsx
   02 - Alter ListItem to return the JSX for a single item in restaurants.data, use props for the variable data.
 
   03 - Refactor RestaurantList to use ListItem to render the items in restaurants.data.
+
+   ## Fifth step (First day)
+
+[Routing in React](https://www.bitovi.com/academy/learn-react/routing.html)
+
+Branch: [05-routing-in-react](https://github.com/thomazbandeira/bitovi-academy-learn-core-react/tree/05-routing-in-react)
+
+
+#### SETUP
+
+Run: npm install react-router-dom@6
+
+ Create src/pages/Home/ (folder)
+
+ Create src/pages/Home/index.ts
+
+ Create src/pages/Home/Home.tsx
+
+ Update src/App.tsx
+
+ Update src/main.tsx
+
+ Create src/pages/Home/Home.test.tsx
+
+ Update src/App.test.tsx
+
+  #### Exercise 01 
+
+  01 - Create routes for the <Home> component and <RestaurantList> component. When the route is "", the <Home> component should display, and when the route is /restaurants then the <RestaurantList> component should display. These changes should be made in src/App.tsx and src/main.tsx..

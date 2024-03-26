@@ -1,19 +1,32 @@
+import type { ReactNode } from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { MemoryRouter } from 'react-router-dom';
+import { describe, expect, it } from 'vitest';
 
 import App from './App';
 
-// Mocking RestaurantList component
-vi.mock('./pages/RestaurantList', () => ({
-  __esModule: true,
-  default: () => <div>Mocked Restaurant List</div>,
-}));
+// Wrap App with MemoryRouter to mock routing
+const renderWithRouter = (ui: ReactNode, { route = '/' } = {}) => {
+  window.history.pushState({}, 'Test page', route)
+  return render(ui, { wrapper: MemoryRouter });
+};
 
-describe('App Component', () => {
-  // Testing if the App component renders without crashing
+describe('App component', () => {
   it('renders without crashing', () => {
-    render(<App />);
-    expect(screen.getByText('Mocked Restaurant List')).toBeInTheDocument();
+    renderWithRouter(<App />);
+    expect(screen.getByText(/place-my-order.com/i)).toBeInTheDocument();
+  });
+
+  it('contains the navigation bar with correct links', () => {
+    renderWithRouter(<App />);
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.getByText('Restaurants')).toBeInTheDocument();
+
+    const homeLink = screen.getByText('Home').closest('a');
+    expect(homeLink).toHaveAttribute('href', '/');
+
+    const restaurantsLink = screen.getByText('Restaurants').closest('a');
+    expect(restaurantsLink).toHaveAttribute('href', '/restaurants');
   });
 });
