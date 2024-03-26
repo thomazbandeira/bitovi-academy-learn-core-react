@@ -159,7 +159,7 @@ Import the styles from Home.module.css and apply them to the new link.
 Branch: [07-managing-state-in-react](https://github.com/thomazbandeira/bitovi-academy-learn-core-react/tree/07-managing-state-in-react)
 
 
-#### SETUP
+#### SETUP 01
 
 Update src/pages/RestaurantList/RestaurantList.tsx to include the State and City dropdown lists.
 
@@ -175,3 +175,20 @@ Call useState() to get a state variable and setState setter.
 Create a helper function that takes a short state name and calls setState.
 Add an onClick handler to the button that calls your helper function.
 Update the paragraph to show the currently-selected state.
+
+#### SETUP 02
+
+Update src/pages/RestaurantList/RestaurantList.tsx
+
+Update src/pages/RestaurantList/RestaurantList.test.tsx
+
+#### Exercise 02
+
+01 - Similar to our state buttons, let’s create buttons for selecting a city.
+
+Call useState() to get a city variable and setCity setter.
+Filter the cities list based on which state is selected.
+Create a helper function that takes a cityName and calls setCity.
+Add an onClick handler to the button that calls your helper function.
+Update the paragraph to show the currently-selected city.
+Hint: Use Array.filter() to narrow down the list of cities based on which state is selected.

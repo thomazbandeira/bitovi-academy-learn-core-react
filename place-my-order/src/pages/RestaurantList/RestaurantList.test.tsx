@@ -72,6 +72,18 @@ describe('RestaurantList component', () => {
     expect(screen.queryByText('Choose a state before selecting a city')).not.toBeInTheDocument()
   })
 
+  it('allows city selection after a state is selected', async () => {
+    render(<RestaurantList />)
+
+    const illinoisButton = screen.getByText('Illinois')
+    await userEvent.click(illinoisButton)
+
+    const greenBayButton = screen.getByText('Springfield')
+    await userEvent.click(greenBayButton)
+
+    expect(screen.getByText('Current city: Springfield')).toBeInTheDocument()
+  })
+
   it('renders ListItem components for each restaurant', () => {
     render(<RestaurantList />)
 

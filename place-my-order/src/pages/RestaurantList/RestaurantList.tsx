@@ -11,6 +11,11 @@ const RestaurantList: React.FC = () => {
     { name: 'Wisconsin', short: 'WI' },
   ]
 
+  const cities = [
+    { name: 'Madison', state: 'WI' },
+    { name: 'Springfield', state: 'IL' },
+  ]
+
   const restaurants = {
     data: [
       {
@@ -64,6 +69,19 @@ const RestaurantList: React.FC = () => {
             <hr />
             <p>
               Current state: {state || "(none)"}
+            </p>
+          </div>
+
+          <div className="form-group">
+            City:
+            {state ? cities.map(({ name }) => (
+              <button key={name} type="button">
+                {name}
+              </button>
+            )) : <> Choose a state before selecting a city</>}
+            <hr />
+            <p>
+              Current city: {"(none)"}
             </p>
           </div>
         </form>
