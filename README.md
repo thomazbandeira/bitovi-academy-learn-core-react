@@ -99,7 +99,7 @@ Update src/pages/RestaurantList/RestaurantList.tsx
 
   03 - Refactor RestaurantList to use ListItem to render the items in restaurants.data.
 
-   ## Fifth step (First day)
+## Fifth step (First day)
 
 [Routing in React](https://www.bitovi.com/academy/learn-react/routing.html)
 
@@ -127,3 +127,27 @@ Run: npm install react-router-dom@6
   #### Exercise 01 
 
   01 - Create routes for the <Home> component and <RestaurantList> component. When the route is "", the <Home> component should display, and when the route is /restaurants then the <RestaurantList> component should display. These changes should be made in src/App.tsx and src/main.tsx..
+
+## Sixth step (First day)
+
+[Styling in React](https://www.bitovi.com/academy/learn-react/styling-in-react.html)
+
+Branch: [06-styling-in-react](https://github.com/thomazbandeira/bitovi-academy-learn-core-react/tree/06-styling-in-react)
+
+
+#### SETUP
+
+Create src/pages/Home/Home.module.css
+
+Update src/pages/Home/Home.test.tsx
+
+
+
+  #### Exercise 01 
+
+  01 - Now that we’ve learned to apply styling in React with CSS Modules, it’s time to practice by styling a link in the Home component. You’ll bring in a Link component from React Router.
+
+Update the styles in Home.module.css to be usable as a CSS Module.
+Update the <Home> component to include a styled link:
+Use <Link> (from the previous section!) to create a link to the /restaurants page.
+Import the styles from Home.module.css and apply them to the new link.
