@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom'
-import RestaurantList from './pages/RestaurantList'
 import './App.css'
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
         </nav>
       </header>
 
-      <RestaurantList />
+      <Outlet />
     </>
   )
 }
