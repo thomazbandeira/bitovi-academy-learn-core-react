@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ListItem from './ListItem'
 
 const RestaurantList: React.FC = () => {
+  const [state, setState] = useState("")
 
   const states = [
     { name: 'Illinois', short: 'IL' },
@@ -43,6 +44,10 @@ const RestaurantList: React.FC = () => {
     ]
   };
 
+  const updateState = (stateShortCode: string) => {
+    setState(stateShortCode)
+  }
+
   return (
     <>
       <div className="restaurants">
@@ -52,13 +57,13 @@ const RestaurantList: React.FC = () => {
           <div className="form-group">
             State:
             {states.map(({ short, name }) => (
-              <button key={short} type="button">
+              <button key={short} onClick={() => updateState(short)} type="button">
                 {name}
               </button>
             ))}
             <hr />
             <p>
-              Current state: {"(none)"}
+              Current state: {state || "(none)"}
             </p>
           </div>
         </form>
